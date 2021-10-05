@@ -4,8 +4,6 @@
 #include <ctime>
 #include <chrono>
 
-
-
 using namespace std;
 
 class Data{
@@ -76,6 +74,15 @@ public:
     void listPrint();
     void listPrintSort();
     void deleteCurrent();
+
+};
+
+class fileWork {
+
+public:
+
+    void getData(char*, int&, Data*&);
+    void countData(char*, int&);
 
 };
 
