@@ -70,7 +70,8 @@ void App::Action(int& key){
         
     }
     else if (key == 2) {
-        Prism* new_prism = new Prism;
+        Figure* new_t = new Triangle(1,1,1);
+        Prism* new_prism = (Prism*)new TrianglePrism(1.2, new_t);
         cout << endl;
         new_prism->AboutBase();
         cout << "Space of surface is SF=" << new_prism->FullSpace() << endl;

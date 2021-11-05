@@ -4,9 +4,8 @@
 class Figure
 {
 public:
-    Figure();
-    virtual double Space();
-    virtual double Perimeter();
+    virtual double Space() = 0;
+    virtual double Perimeter() = 0;
 };
 
 class Circle : public Figure{
@@ -44,6 +43,7 @@ public:
     virtual double Space();
     virtual double Perimeter();
 
+
 };
 
 class Hexagon : public Figure {
@@ -65,15 +65,27 @@ private:
     Figure* base;
     double h;
 public:
-    Prism();
+
+    Prism(double new_h, Figure* new_base) {
+        h = new_h;
+        base = BaseAlloc(new_base);
+    }
 
     ~Prism() {
         delete base;
     }
 
+    virtual Figure* BaseAlloc(Figure*) = 0;
     virtual double FullSpace();
     virtual double Volume();
     virtual void AboutBase();
 };
+
+class TrianglePrism : protected Prism {
+
+    TrianglePrism(double new_h, Figure* new_base) : Prism(new_h, new_base) {};
+    virtual Figure* BaseAlloc(Figure*);
+};
+
 
 #endif // FIGURE_H

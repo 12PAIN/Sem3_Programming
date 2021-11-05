@@ -7,11 +7,6 @@
 
 using namespace std;
 
-Figure::Figure(){}
-
-double Figure::Space() { return 0; };
-double Figure::Perimeter() { return 0; };
-
 double Hexagon::Space() {
     return 6 * (a * a * sqrt(3)) / 4;
 }
@@ -30,41 +25,18 @@ double Triangle::Perimeter() {
     return a + b + c;
 }
 
+void Triangle::GetParams(double& new_a, double& new_b, double& new_c) {
+    new_a = a;
+    new_b = b;
+    new_c = c;
+}
+
 double Circle::Space() {
     return M_PI * r * r;
 }
 
 double Circle::Perimeter() {
     return 2 * M_PI * r;
-}
-
-Prism::Prism() {
-    cout << "What base of Prism you want?\n";
-    cout << "1. Circle\n";
-    cout << "2. Triangle\n";
-    cout << "3. Hexagon\n";
-    int key;
-    cout << "Insert key->"; cin >> key;
-
-    if(key==1){
-        cout << "\nInsert radius of base->"; double temp; cin >> temp;
-        base = new Circle(temp);
-    }
-    else if (key == 2) {
-        double a, b, c;
-        cout << "\nInsert lenght of a side->"; cin >> a;
-        cout << "\nInsert lenght of b side->"; cin >> b;
-        cout << "\nInsert lenght of c side->"; cin >> c;
-        base = new Triangle(a, b, c);
-    }
-    else if (key == 3) {
-        double a;
-        cout << "\nInsert legth of a side->"; cin >> a;
-        base = new Hexagon(a);
-    }
-
-    cout << "\nInsert height of prism->"; cin >> h;
-
 }
 
 double Prism::Volume() {
@@ -78,4 +50,9 @@ double Prism::FullSpace() {
 void Prism::AboutBase() {
     cout << "Space of base is Sb=" << base->Space() << endl;
     cout << "Perimeter of base is Sp=" << base->Perimeter() << endl;
+}
+
+Figure* TrianglePrism::BaseAlloc(Figure* new_figure) {
+
+    return (Prism*)new Triangle(a,b,c);
 }
